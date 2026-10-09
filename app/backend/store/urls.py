@@ -1,0 +1,107 @@
+from django.urls import path
+
+from .views import (
+    CartAddItemView,
+    CartClearView,
+    CartRemoveItemView,
+    CartUpdateItemView,
+    CartView,
+    CategoryListView,
+    ProductDetailView,
+    ProductListView,
+    RegisterAPIView,
+    VerifyEmailAPIView,
+    ResendVerificationEmailAPIView,
+    OrderCreateAPIView,
+    OrderListAPIView,
+    OrderDetailAPIView,
+    OrderCancelAPIView,
+    UserProfileAPIView,
+)
+
+urlpatterns = [
+    path(
+        "products/",
+        ProductListView.as_view(),
+        name="product-list",
+    ),
+    path(
+        "products/<int:pk>/",
+        ProductDetailView.as_view(),
+        name="product-detail",
+    ),
+    path(
+        "categories/",
+        CategoryListView.as_view(),
+        name="category-list",
+    ),
+    path(
+        "auth/register/",
+        RegisterAPIView.as_view(),
+        name="register",
+    ),
+    path(
+        "auth/verify-email/<uidb64>/<token>/",
+        VerifyEmailAPIView.as_view(),
+        name="verify-email",
+    ),
+    path(
+        "auth/resend-verification/",
+        ResendVerificationEmailAPIView.as_view(),
+        name="resend-verification",
+    ),
+
+
+    # Cart
+    path(
+        "cart/",
+        CartView.as_view(),
+        name="cart",
+    ),
+    path(
+        "cart/add/",
+        CartAddItemView.as_view(),
+        name="cart-add",
+    ),
+    path(
+        "cart/items/<int:item_id>/",
+        CartUpdateItemView.as_view(),
+        name="cart-update",
+    ),
+    path(
+        "cart/items/<int:item_id>/remove/",
+        CartRemoveItemView.as_view(),
+        name="cart-remove",
+    ),
+    path(
+        "cart/clear/",
+        CartClearView.as_view(),
+        name="cart-clear",
+    ),
+    path(
+        "orders/",
+        OrderListAPIView.as_view(),
+        name="order-list",
+    ),
+    path(
+        "orders/create/",
+        OrderCreateAPIView.as_view(),
+        name="order-create",
+    ),
+    path(
+        "orders/<int:pk>/",
+        OrderDetailAPIView.as_view(),
+        name="order-detail",
+    ),
+    path(
+    "orders/<int:pk>/cancel/",
+    OrderCancelAPIView.as_view(),
+    name="order-cancel",
+    ),
+    path(
+        "profile/",
+        UserProfileAPIView.as_view(),
+        name="profile",
+    ),
+]
+

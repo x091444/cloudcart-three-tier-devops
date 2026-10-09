@@ -1,0 +1,345 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-container {
+  position: relative;
+  width: min(1180px, 92%);
+  min-height: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.navbar-logo {
+  flex-shrink: 0;
+  color: #172033;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.navbar-logo span {
+  color: #2563eb;
+}
+
+/* =========================
+   DESKTOP NAVIGATION
+========================= */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex: 1;
+}
+
+.navbar-links a {
+  position: relative;
+  padding: 25px 0;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #172033;
+}
+
+.navbar-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 17px;
+  height: 2px;
+  border-radius: 2px;
+  background: #2563eb;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-action {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #334155;
+  transition: background 0.2s ease;
+}
+
+.navbar-action:hover {
+  background: #f1f5f9;
+}
+
+.navbar-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.navbar-badge {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  min-width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 0.52rem;
+  font-weight: 800;
+}
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.navbar-account {
+  position: relative;
+}
+
+.account-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #334155;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.account-button:hover,
+.account-button.account-logged-in {
+  background: #f1f5f9;
+}
+
+.account-icon {
+  font-size: 0.9rem;
+}
+
+.account-arrow {
+  color: #94a3b8;
+  font-size: 0.65rem;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 100;
+  width: 235px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+}
+
+.account-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+}
+
+.account-user strong {
+  color: #172033;
+  font-size: 0.72rem;
+}
+
+.account-user span {
+  overflow: hidden;
+  color: #94a3b8;
+  font-size: 0.62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-divider {
+  height: 1px;
+  margin: 5px 0;
+  background: #eef2f7;
+}
+
+.account-dropdown > a,
+.logout-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #475569;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.account-dropdown > a:hover,
+.logout-button:hover {
+  background: #f8fafc;
+  color: #2563eb;
+}
+
+.account-dropdown-title {
+  padding: 10px;
+  color: #64748b;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.dropdown-login,
+.dropdown-register {
+  margin-top: 4px;
+  text-align: center !important;
+}
+
+.dropdown-login {
+  background: #172033 !important;
+  color: white !important;
+}
+
+.dropdown-login:hover {
+  background: #2563eb !important;
+}
+
+.dropdown-register {
+  color: #2563eb !important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-menu-button {
+  display: none;
+  padding: 7px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #172033;
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .navbar-container {
+    min-height: 62px;
+    gap: 10px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-actions {
+    margin-left: auto;
+    gap: 3px;
+  }
+
+  .account-name,
+  .account-arrow {
+    display: none;
+  }
+
+  .account-button {
+    padding: 8px;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .mobile-navigation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background: white;
+    box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
+  }
+
+  .mobile-navigation a,
+  .mobile-logout {
+    padding: 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #475569;
+    text-align: left;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .mobile-navigation a:hover,
+  .mobile-navigation a.active,
+  .mobile-logout:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+  }
+
+  .mobile-logout {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-container {
+    width: 94%;
+  }
+
+  .navbar-logo {
+    font-size: 1.2rem;
+  }
+
+  .navbar-action {
+    width: 32px;
+    height: 32px;
+  }
+}
