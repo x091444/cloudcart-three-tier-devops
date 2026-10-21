@@ -41,3 +41,19 @@ Thumbs.db
 *.tfvars
 !*.tfvars.example
 crash.log
+
+# Local secrets and database backups
+.env
+.env.*
+backups/
+
+# Local secrets and database backups
+.env
+.env.*
+backups/
+
+
+# Local secrets and database backups
+.env
+.env.*
+backups/
