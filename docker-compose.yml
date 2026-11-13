@@ -1,53 +1,133 @@
+
 services:
+
   db:
     image: postgres:18
     restart: unless-stopped
+
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
     volumes:
       - postgres_data:/var/lib/postgresql
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 15s
+
+    security_opt:
+      - no-new-privileges:true
+
+    networks:
+      - cloudcart-network
+
 
   backend:
-    build: ./app/backend
+    build:
+      context: ./app/backend
+      dockerfile: Dockerfile
+
     restart: unless-stopped
+
     environment:
       SECRET_KEY: ${DJANGO_SECRET_KEY}
-      DEBUG: ${DEBUG:-False}
+      DEBUG: "False"
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+
       DB_ENGINE: django.db.backends.postgresql
       DB_NAME: ${POSTGRES_DB}
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       DB_HOST: db
       DB_PORT: "5432"
+
     volumes:
       - staticfiles:/app/staticfiles
-    depends_on:
-      db:
-        condition: service_healthy
+
     expose:
       - "8000"
 
+    depends_on:
+      db:
+        condition: service_healthy
+
+    read_only: true
+
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+
+    security_opt:
+      - no-new-privileges:true
+
+    cap_drop:
+      - ALL
+
+    pids_limit: 100
+
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import socket; s=socket.create_connection(('127.0.0.1',8000),3); s.close()"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+    networks:
+      - cloudcart-network
+
+
   frontend:
-    build: ./app/frontend
+    build:
+      context: ./app/frontend
+      dockerfile: Dockerfile
+
     restart: unless-stopped
+
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:8080"
+      - "443:8443"
+
     volumes:
       - staticfiles:/staticfiles:ro
       - /var/www/certbot:/var/www/certbot:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+
+    read_only: true
+
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+
+    security_opt:
+      - no-new-privileges:true
+
+    cap_drop:
+      - ALL
+
+    pids_limit: 100
+
+    networks:
+      - cloudcart-network
+
 
 volumes:
   postgres_data:
   staticfiles:
+
+
+networks:
+  cloudcart-network:
+    driver: bridge
