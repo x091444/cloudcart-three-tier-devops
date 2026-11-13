@@ -100,7 +100,7 @@ services:
     volumes:
       - staticfiles:/staticfiles:ro
       - /var/www/certbot:/var/www/certbot:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /etc/cloudcart-certs:/etc/nginx/certs:ro
 
     depends_on:
       backend:
