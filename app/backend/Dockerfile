@@ -45,8 +45,10 @@ RUN python -m pip install \
     && rm -rf /wheels \
     && chown -R django:django /app
 
-# Copy application source
-COPY --chown=10001:10001 . .
+# Copy only required Django application files
+COPY --chown=10001:10001 config/ ./config/
+COPY --chown=10001:10001 store/ ./store/
+COPY --chown=10001:10001 manage.py ./
 
 USER 10001:10001
 

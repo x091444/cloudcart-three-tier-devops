@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export const WishlistContext = createContext(null);
+import { WishlistContext } from "./WishlistContextValue";
 
 const WISHLIST_STORAGE_KEY = "cloudcart_wishlist";
 

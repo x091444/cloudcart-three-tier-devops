@@ -1,12 +1,11 @@
 import {
-  createContext,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
 
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./AuthContextValue";
 
 import {
   addCartItem,
@@ -16,7 +15,7 @@ import {
   updateCartItem,
 } from "../services/api";
 
-export const CartContext = createContext(null);
+import { CartContext } from "./CartContextValue";
 
 export function CartProvider({ children }) {
   const { isAuthenticated, accessToken } = useContext(AuthContext);

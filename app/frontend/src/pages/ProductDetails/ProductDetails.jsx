@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { CartContext } from "../../context/CartContext";
-import { WishlistContext } from "../../context/WishlistContext";
+import { CartContext } from "../../context/CartContextValue";
+import { WishlistContext } from "../../context/WishlistContextValue";
 import { getProduct } from "../../services/api";
 
 import "./ProductDetails.css";

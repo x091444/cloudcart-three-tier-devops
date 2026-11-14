@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
-import { CartContext } from "../../context/CartContext";
-import { WishlistContext } from "../../context/WishlistContext";
-import { AuthContext } from "../../context/AuthContext";
+import { CartContext } from "../../context/CartContextValue";
+import { WishlistContext } from "../../context/WishlistContextValue";
+import { AuthContext } from "../../context/AuthContextValue";
 
 import "./Navbar.css";
 

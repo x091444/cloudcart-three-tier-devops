@@ -1,14 +1,17 @@
-
 # Stage 1: Build React application
 FROM node:22-alpine AS builder
 
 WORKDIR /app
 
+# Copy dependency manifests first
 COPY package*.json ./
 
 RUN npm ci
 
-COPY . .
+# Copy only required application files
+COPY vite.config.js index.html ./
+COPY src/ ./src/
+COPY public/ ./public/
 
 RUN npm run build
 

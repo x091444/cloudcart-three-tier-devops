@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 
-import { CartContext } from "../../context/CartContext";
-import { WishlistContext } from "../../context/WishlistContext";
+import { CartContext } from "../../context/CartContextValue";
+import { WishlistContext } from "../../context/WishlistContextValue";
 
 import "./ProductCard.css";
 

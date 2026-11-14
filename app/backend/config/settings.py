@@ -167,7 +167,7 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         'CORS_ALLOWED_ORIGINS',
-        'http://localhost:5173,http://15.207.198.175:5173'
+        'https://cloudcart.binsonjoseph.xyz'
     ).split(',')
     if origin.strip()
 ]

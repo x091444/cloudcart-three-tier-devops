@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContextValue";
 
 import "./Login.css";
 
@@ -54,7 +54,7 @@ function Login() {
       const destination = location.state?.from || "/";
 
       navigate(destination);
-    } catch (error) {
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);

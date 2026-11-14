@@ -14,17 +14,9 @@ function Products() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [searchTerm, setSearchTerm] = useState(
-    searchParams.get("search") || ""
-  );
-
-  const [selectedCategory, setSelectedCategory] = useState(
-    searchParams.get("category") || "All"
-  );
-
-  const [sortOption, setSortOption] = useState(
-    searchParams.get("sort") || "featured"
-  );
+  const searchTerm = searchParams.get("search") || "";
+  const selectedCategory = searchParams.get("category") || "All";
+  const sortOption = searchParams.get("sort") || "featured";
 
   /* =========================
      LOAD PRODUCTS FROM API
@@ -52,25 +44,6 @@ function Products() {
 
     loadProducts();
   }, []);
-
-  /* =========================
-     SYNC URL PARAMETERS
-  ========================= */
-
-  useEffect(() => {
-    const categoryFromUrl =
-      searchParams.get("category") || "All";
-
-    const searchFromUrl =
-      searchParams.get("search") || "";
-
-    const sortFromUrl =
-      searchParams.get("sort") || "featured";
-
-    setSelectedCategory(categoryFromUrl);
-    setSearchTerm(searchFromUrl);
-    setSortOption(sortFromUrl);
-  }, [searchParams]);
 
   /* =========================
      CATEGORIES
@@ -194,8 +167,6 @@ function Products() {
   const handleSearchChange = (event) => {
     const value = event.target.value;
 
-    setSearchTerm(value);
-
     const params = new URLSearchParams(
       searchParams
     );
@@ -215,8 +186,6 @@ function Products() {
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
-
-    setSelectedCategory(category);
 
     const params = new URLSearchParams(
       searchParams
@@ -238,8 +207,6 @@ function Products() {
   const handleSortChange = (event) => {
     const sort = event.target.value;
 
-    setSortOption(sort);
-
     const params = new URLSearchParams(
       searchParams
     );
@@ -258,9 +225,6 @@ function Products() {
   ========================= */
 
   const clearFilters = () => {
-    setSearchTerm("");
-    setSelectedCategory("All");
-    setSortOption("featured");
     setSearchParams({});
   };
 

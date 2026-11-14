@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContextValue";
 
 import "./Register.css";
 
@@ -79,7 +79,7 @@ function Register() {
       }
 
       navigate("/login");
-    } catch (error) {
+    } catch {
       setError("Something went wrong. Please try again.");
     }
   };
