@@ -159,9 +159,11 @@ function Checkout() {
       newErrors.email =
         "Email is required";
     } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-        formData.email
-      )
+      formData.email.trim().length > 254 ||
+      formData.email.indexOf("@") <= 0 ||
+      formData.email.indexOf("@") !== formData.email.lastIndexOf("@") ||
+      formData.email.indexOf(".", formData.email.indexOf("@") + 1) === -1 ||
+      /\s/.test(formData.email)
     ) {
       newErrors.email =
         "Enter a valid email address";
