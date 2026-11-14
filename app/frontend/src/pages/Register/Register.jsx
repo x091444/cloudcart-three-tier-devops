@@ -51,7 +51,27 @@ function Register() {
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const emailValue = email.trim();
+
+    if (emailValue.length > 254) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    const atIndex = emailValue.indexOf("@");
+    const dotIndex = emailValue.indexOf(".", atIndex + 1);
+
+    const hasWhitespace = Array.from(emailValue).some(
+      (character) => character.trim() === ""
+    );
+
+    if (
+      atIndex <= 0 ||
+      atIndex !== emailValue.lastIndexOf("@") ||
+      dotIndex <= atIndex + 1 ||
+      dotIndex === emailValue.length - 1 ||
+      hasWhitespace
+    ) {
       setError("Please enter a valid email address.");
       return;
     }
@@ -69,7 +89,7 @@ function Register() {
     try {
       const result = await register({
         username,
-        email,
+        email: emailValue,
         password,
       });
 
